@@ -11,6 +11,6 @@ void convertDateTimeToString(const struct tm *t, char *buffer, int bufferSize);
 
 
 void readLine(char* buffer, int size);
-
+int readInt(const char* prompt);
 #endif
 
