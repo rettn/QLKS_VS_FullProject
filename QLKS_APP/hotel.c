@@ -2,32 +2,30 @@
 #include <string.h>
 #include "hotel.h"
 
-void inputHotel(Hotel *h) {
+void inputHotel(Hotel* h) {
     printf("Nhap ma khach san: ");
     readLine(h->hotelNo, sizeof(h->hotelNo));
-    
 
     printf("Nhap ten khach san: ");
     readLine(h->name, sizeof(h->name));
-    
 
     printf("Nhap dia chi: ");
     readLine(h->address, sizeof(h->address));
-    
 
     printf("Nhap loai: ");
     readLine(h->type, sizeof(h->type));
-    
 
+    char temp[10];
     printf("Nhap so phong: ");
-    readLine(h->roomCount, sizeof(h->roomCount));
-    
+    readLine(temp, sizeof(temp));
+    h->roomCount = atoi(temp);
 
     for (int i = 0; i < h->roomCount; i++) {
         printf("--- Phong %d ---\n", i + 1);
         inputRoom(&h->roomList[i]);
     }
 }
+
 
 void displayHotel(const Hotel *h) {
     printf("Ten KS: %s, Ma KS: %s, Dia chi: %s, Loai: %s\n",
