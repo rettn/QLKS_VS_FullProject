@@ -7,11 +7,11 @@ void resetColor() {
 }
 void printSuccess(const char* msg) {
     setColor(10);
-    printf("✔ %s\n", msg);
+    printf("✅ %s\n", msg);
     resetColor();
 }
 void printError(const char* msg) {
     setColor(12);
-    printf("✘ %s\n", msg);
+    printf("❎ %s\n", msg);
     resetColor();
 }
