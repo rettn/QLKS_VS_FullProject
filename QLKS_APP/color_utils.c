@@ -1,23 +1,17 @@
-#include <stdio.h>
-#include <string.h>
-#include "customer.h"
-#include "utility.h"
 #include "color_utils.h"
-void inputCustomer(Customer *c) {
-    printf("Nhap CCCD: ");
-    readLine(c->cmtnd, sizeof(c->cmtnd));
-    inputCustomerWithoutCMTND(c);
+void setColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-void inputCustomerWithoutCMTND(Customer *c) {
-    printf("Nhap ten: ");
-    readLine(c->fullname, sizeof(c->fullname));
-    c->age = readInt("Nhap tuoi: ");
-    printf("Nhap gioi tinh: ");
-    readLine(c->gender, sizeof(c->gender));
-    printf("Nhap dia chi: ");
-    readLine(c->address, sizeof(c->address));
+void resetColor() {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
-void displayCustomer(const Customer *c) {
-    printf("Ten: %s | Tuoi: %d | CMTND: %s | Gioi tinh: %s | Dia chi: %s\n",
-           c->fullname, c->age, c->cmtnd, c->gender, c->address);
+void printSuccess(const char* msg) {
+    setColor(10);
+    printf("%s\n", msg);
+    resetColor();
+}
+void printError(const char* msg) {
+    setColor(12);
+    printf("%s\n", msg);
+    resetColor();
 }
