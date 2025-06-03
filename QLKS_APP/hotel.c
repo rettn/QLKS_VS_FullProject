@@ -35,7 +35,7 @@ void showRoomAvailable(const Hotel *h, const Booking *bookings, int bookingCount
     printf("Khach san: %s | Ma: %s | Dia chi: %s | Loai: %s\n",
            h->name, h->hotelNo, h->address, h->type);
     resetColor();
-    printf("| %-10s | %-15s | Tang | So nguoi | Gia       |\n", "Ma phong", "Ten phong");
+    printf("| %-10s | %-15s |   Tang   | So nguoi |    Gia   |\n", "Ma phong", "Ten phong");
     printf("----------------------------------------------------------\n");
     for (int i = 0; i < h->roomCount; i++) {
         if (isRoomAvailable(h, bookings, bookingCount, &h->roomList[i])) {
