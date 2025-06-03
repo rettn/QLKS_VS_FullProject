@@ -18,6 +18,6 @@ void inputCustomerWithoutCMTND(Customer *c) {
     readLine(c->address, sizeof(c->address));
 }
 void displayCustomer(const Customer *c) {
-    printf("Ten: %s | Tuoi: %d | CMTND: %s | Gioi tinh: %s | Dia chi: %s\n",
+    printf("Ten: %s | Tuoi: %d | CCCD: %s | Gioi tinh: %s | Dia chi: %s\n",
            c->fullname, c->age, c->cmtnd, c->gender, c->address);
 }
