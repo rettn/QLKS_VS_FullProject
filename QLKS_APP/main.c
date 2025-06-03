@@ -4,18 +4,26 @@
 #include "customer.h"
 #include "booking.h"
 #include "datacontroller.h"
+#include "color_utils.h"
 
 #define MAX_HOTELS 10
-#define MAX_CUSTOMERS 50
 #define MAX_BOOKINGS 100
 
+void printTitle(const char* title) {
+    setColor(11);
+    printf("============================================\n");
+    printf("      %s\n", title);
+    printf("============================================\n");
+    resetColor();
+}
+
 void menu() {
-    printf("\n----- QUAN LY KHACH SAN -----\n");
-    printf("1. Nhap thong tin khach san\n");
-    printf("2. Hien thi phong trong\n");
-    printf("3. Dat phong\n");
-    printf("4. Hien thi danh sach dat phong\n");
-    printf("0. Thoat\n");
+    printTitle("QUAN LY KHACH SAN");
+    printf("  [1] Nhap thong tin khach san\n");
+    printf("  [2] Hien thi phong trong\n");
+    printf("  [3] Dat phong\n");
+    printf("  [4] Hien thi danh sach dat phong\n");
+    printf("  [0] Thoat\n");
     printf("------------------------------\n");
     printf("Chon: ");
 }
@@ -24,15 +32,20 @@ int main() {
     int choice;
     do {
         menu();
-        scanf("%d", &choice);
-        getchar();
+        if (scanf("%d", &choice) != 1) {
+            printError("Lua chon khong hop le!");
+            while (getchar() != '\n');
+            continue;
+        }
+        while (getchar() != '\n'); 
         switch (choice) {
             case 1:
                 if (dataController.hotelCount < MAX_HOTELS) {
                     inputHotel(&dataController.hotelList[dataController.hotelCount]);
                     dataController.hotelCount++;
+                    printSuccess("Da them khach san thanh cong.");
                 } else {
-                    printf("Danh sach khach san day!\n");
+                    printError("Danh sach khach san da day!");
                 }
                 break;
             case 2:
@@ -44,22 +57,27 @@ int main() {
                 if (dataController.bookingCount < MAX_BOOKINGS) {
                     inputBooking(&dataController.bookingList[dataController.bookingCount]);
                     dataController.bookingCount++;
+                    printSuccess("Dat phong thanh cong.");
                 } else {
-                    printf("Danh sach dat phong day!\n");
+                    printError("Danh sach dat phong da day!");
                 }
                 break;
             case 4:
+                printf("| %-10s | %-10s | %-12s | %-19s | %-19s |\n",
+                       "Ma KS", "Ma phong", "CMTND", "Ngay nhan", "Ngay tra");
+                printf("----------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < dataController.bookingCount; i++) {
                     displayBooking(&dataController.bookingList[i]);
                 }
                 break;
             case 0:
-                printf("Tam biet!\n");
+                printSuccess("Cam on ban. Tam biet!");
                 break;
             default:
-                printf("Lua chon khong hop le!\n");
+                printError("Lua chon khong hop le!");
         }
+        printf("\nNhan Enter de tiep tuc...");
+        getchar();
     } while (choice != 0);
-
     return 0;
 }
