@@ -63,8 +63,8 @@ int main() {
                 }
                 break;
             case 4:
-                printf("| %-10s | %-10s | %-12s | %-19s | %-19s |\n",
-                       "Ma KS", "Ma phong", "CMTND", "Ngay nhan", "Ngay tra");
+                printf("|  %-10s  |  %-10s  |  %-12s  |  %-19s  |  %-19s  |\n",
+                       "Ma KS", "Ma phong", "CCCD", "Ngay nhan", "Ngay tra");
                 printf("----------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < dataController.bookingCount; i++) {
                     displayBooking(&dataController.bookingList[i]);
