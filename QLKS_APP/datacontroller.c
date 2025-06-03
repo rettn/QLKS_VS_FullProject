@@ -1,12 +1,6 @@
 #include <string.h>
 #include "datacontroller.h"
-
-DataController dataController = {
-    .customerCount = 0,
-    .hotelCount = 0,
-    .bookingCount = 0
-};
-
+DataController dataController = {0};
 Hotel* findHotel(const char *hotelNo) {
     for (int i = 0; i < dataController.hotelCount; i++) {
         if (strcmp(dataController.hotelList[i].hotelNo, hotelNo) == 0) {
