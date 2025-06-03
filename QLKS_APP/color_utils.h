@@ -5,5 +5,5 @@
   void setColor(int color);
   void resetColor();
   void printSuccess(const char* msg);
-v  oid printError(const char* msg);
+  void printError(const char* msg);
 #endif
