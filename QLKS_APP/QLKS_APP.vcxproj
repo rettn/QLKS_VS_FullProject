@@ -26,6 +26,7 @@
     <ClCompile Include="utility.c" />
     <ClCompile Include="hotel.c" />
     <ClCompile Include="datacontroller.c" />
+    <ClCompile Include="color_utils.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="booking.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="utility.h" />
     <ClInclude Include="hotel.h" />
     <ClInclude Include="datacontroller.h" />
+    <ClInclude Include="color_utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
