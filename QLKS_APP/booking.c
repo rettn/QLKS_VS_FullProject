@@ -3,53 +3,43 @@
 #include "booking.h"
 #include "datacontroller.h"
 #include "customer.h"
-
+#include "color_utils.h"
 void inputBooking(Booking *booking) {
     printf("Nhap ma khach san: ");
-    readLine(booking->hotelNo, sizeof(booking->hotelNo));
-
-    // Kiểm tra khách sạn tồn tại
+    fgets(booking->hotelNo, sizeof(booking->hotelNo), stdin);
+    booking->hotelNo[strcspn(booking->hotelNo, "\n")] = 0;
     while (findHotel(booking->hotelNo) == NULL) {
-        printf("Khach san khong ton tai. Nhap lai: ");
-        readLine(booking->hotelNo, sizeof(booking->hotelNo));
-        
+        printError("Khach san khong ton tai. Nhap lai: ");
+        fgets(booking->hotelNo, sizeof(booking->hotelNo), stdin);
+        booking->hotelNo[strcspn(booking->hotelNo, "\n")] = 0;
     }
-
     printf("Nhap ma phong: ");
-	readLine(booking->roomNo, sizeof(booking->roomNo));
-	
-
-    //Không kiểm tra chi tiết phòng, giả sử hợp lệ
-
+    fgets(booking->roomNo, sizeof(booking->roomNo), stdin);
+    booking->roomNo[strcspn(booking->roomNo, "\n")] = 0;
     printf("Nhap CMTND: ");
-    readLine(booking->cmtnd, sizeof(booking->cmtnd));
-	
-
-    // Nếu khách hàng chưa tồn tại, thêm mới
+    fgets(booking->cmtnd, sizeof(booking->cmtnd), stdin);
+    booking->cmtnd[strcspn(booking->cmtnd, "\n")] = 0;
     int found = 0;
     for (int i = 0; i < dataController.customerCount; i++) {
         if (strcmp(dataController.customerList[i].cmtnd, booking->cmtnd) == 0) {
-            found = 1;
-            break;
+            found = 1; break;
         }
     }
     if (!found && dataController.customerCount < MAX_CUSTOMERS) {
         Customer *newC = &dataController.customerList[dataController.customerCount++];
         strcpy(newC->cmtnd, booking->cmtnd);
         inputCustomerWithoutCMTND(newC);
+        printSuccess("Them khach hang moi thanh cong.");
     }
-
     printf("Nhap ngay nhan (yyyy-MM-dd HH:mm:ss): ");
-    readLine(booking->checkIn, sizeof(booking->checkIn));
-	
-
+    fgets(booking->checkIn, sizeof(booking->checkIn), stdin);
+    booking->checkIn[strcspn(booking->checkIn, "\n")] = 0;
     printf("Nhap ngay tra (yyyy-MM-dd HH:mm:ss): ");
-    readLine(booking->checkOut, sizeof(booking->checkOut));
-	
+    fgets(booking->checkOut, sizeof(booking->checkOut), stdin);
+    booking->checkOut[strcspn(booking->checkOut, "\n")] = 0;
 }
-
 void displayBooking(const Booking *booking) {
-    printf("Ma KS: %s, Ma phong: %s, CMTND: %s, Ngay nhan: %s, Ngay tra: %s\n",
+    printf("| %-10s | %-10s | %-12s | %-19s | %-19s |\n",
            booking->hotelNo, booking->roomNo, booking->cmtnd,
            booking->checkIn, booking->checkOut);
 }
