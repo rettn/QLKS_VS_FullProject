@@ -8,13 +8,16 @@
 
 #define MAX_HOTELS 10
 #define MAX_BOOKINGS 100
-
+void resetColor();
+   
 void printTitle(const char* title) {
+	resetColor();
     setColor(11);
+
     printf("============================================\n");
     printf("      %s\n", title);
     printf("============================================\n");
-    resetColor();
+
 }
 
 void menu() {
