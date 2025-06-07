@@ -15,7 +15,7 @@ int isRoomBooked(const char* hotelNo, const char* roomNo) {
     return 0;
 }
 
-void inputBooking(Booking *booking) {
+void inputBooking(Booking* booking) {
     printf("Nhap ma khach san: ");
     fgets(booking->hotelNo, sizeof(booking->hotelNo), stdin);
     booking->hotelNo[strcspn(booking->hotelNo, "\n")] = 0;
@@ -49,7 +49,7 @@ void inputBooking(Booking *booking) {
     }
 
     if (!found && dataController.customerCount < MAX_CUSTOMERS) {
-        Customer *newC = &dataController.customerList[dataController.customerCount++];
+        Customer* newC = &dataController.customerList[dataController.customerCount++];
         strcpy(newC->cmtnd, booking->cmtnd);
         inputCustomerWithoutCMTND(newC);
         printSuccess("Them khach hang moi thanh cong.");
@@ -62,4 +62,8 @@ void inputBooking(Booking *booking) {
     printf("Nhap ngay tra (yyyy-MM-dd HH:mm:ss): ");
     fgets(booking->checkOut, sizeof(booking->checkOut), stdin);
     booking->checkOut[strcspn(booking->checkOut, "\n")] = 0;
+}
+void displayBooking(const Booking* b) {
+    printf("| %-10s | %-10s | %-12s | %-19s | %-19s |\n",
+        b->hotelNo, b->roomNo, b->cmtnd, b->checkIn, b->checkOut);
 }
